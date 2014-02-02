@@ -112,7 +112,7 @@ m.1 <- sqrt(sum(distribution.1))*max(abs(distribution.1/sum(distribution.1)-log1
     # Calculating Leemis' m for dataset 1
 d.1 <- sqrt(sum(distribution.1))*sqrt(sum((distribution.1/sum(distribution.1)-log10(1+1/c(1:9)))^2))
     # Calculating Cho-Gains' d for dataset 1
-    
+      
 distribution.2 <- rep(c(112,111), c(1,8)) 
     # making a distribution where Benford's law is not met
 dataset.2 <- rep(seq(10,90,by=10),distribution.2) 
@@ -123,9 +123,10 @@ d.2 <- sqrt(sum(distribution.2))*sqrt(sum((distribution.2/sum(distribution.2)-lo
     # Calculating Cho-Gains' d for dataset 2
   
 result.1 <- benford(dataset.1)    
-test.1 <- c(m=result.1[[1]]==m.1, d=result.1[[2]]==d.1, distribution=sum(result.1[[3]]==distribution.1)==9)
+test.1 <- c(m=result.1[[1]]==m.1, d=result.1[[2]]==d.1, distribution=sum(result.1[[3]]!=distribution.1)==9)
     # comparing the truth for the digit distributions and two test statistics to the results 
     # from 'benford' fucntion for dataset 1.
+    # putting "!=" instead of "==" to fail unit test for wrong distribution for dataset 1
 result.2 <- benford(dataset.2)
 test.2 <- c(m=result.2[[1]]==m.2, d=result.2[[2]]==d.2, distribution=sum(result.2[[3]]==distribution.2)==9)
     # comparing the truth for the digit distributions and two test statistics to the results 
