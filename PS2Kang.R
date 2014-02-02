@@ -1,4 +1,4 @@
-## 1) calculating violtions
+## 1) calculating violations
 ## option "b" for both Leemis' m statistic and Cho-Gains' d
 ## option "m" for Leemis' m statistic only
 ## option "d" for Cho-Gains' d only
@@ -23,9 +23,9 @@ benford <- function(x, print="b"){
   i <- c(1:9)  
   # setting as a numeric vector of numbers from 1 to 9.
   
-  m <- max(Xi -log10(1+1/i))  # calculating Leemis' m
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))  # calculating Leemis' m
   
-  d <- sqrt(sum((Xi-log10(1+1/i))^2))  # calculating Cho-Gains' d
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))  # calculating Cho-Gains' d
   
   output <- list(Leemis.m=m, Cho.Gains.d=d, The.Full.Digit.Distribution=distribution)
   # making a list consist of Leemis'm, Cho-Gains' d, and the full digit distribution
@@ -40,3 +40,39 @@ benford <- function(x, print="b"){
        }
   }
 }
+
+
+## 2) Critical Values
+print.benfords <- function(x){
+  firstdigit <- as.numeric(substr(x,1,1)) 
+  distribution <- c(firstdigit, c(1:9)) 
+  distribution <- (table(distribution)-1)
+  Xi <- (distribution/sum(distribution)) 
+  i <- c(1:9)  
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))
+  # the above code is the same as the previous function code except the code regarding printing
+  
+  crit.m <- c(m <= 0.851, m>0.851 & m<=0.967, m> 0.967 & m<=1.212, m>1.212 )
+  crit.d <- c(d<= 1.121, d>1.121 & d<=1.330, d> 1.330 & d<=1.569, d>1.569 )
+  # making boolean code for identifying the critical values for m and d
+  
+  asterisk <- (c(" ", "*", "**", "***"))
+  # making a vector of asterisks showing significance level
+  
+  
+  output <- matrix(c(m, d, asterisk[crit.m==TRUE],  asterisk[crit.d==TRUE]),2,2)  
+  rownames(output) <- c("Leemis' m","Cho-Gains' d")
+  colnames(output) <- c("","")
+  # making a matrix which shows the name of each statistic, statistic as it was calculated,
+  # and the relevant number of asterisk's. 
+  # If the blooean value of crit.m(crit.d) is TRUE, then the corresponding element of asterisk
+  # will be shown in the matrix. 
+  
+  cat("Benford's law test to reject the null hypothesis of no fraud")
+  cat("\n")
+  print(output, quote=FALSE)
+  cat("\n")
+  cat("Significant Level: *** alpha<0.01, ** alpha<0.05, * alpha<0.10")
+  }
+  # print the output without quotation mark, and print a legend explaining the asterisk's.
