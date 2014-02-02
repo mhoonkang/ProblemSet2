@@ -76,7 +76,6 @@ print.benfords <- function(x){
   cat("\n")
   cat("Significant Level: *** alpha<0.01, ** alpha<0.05, * alpha<0.10")
   # print the output without quotation mark, and print a legend explaining the asterisk's.
-  return.value<-t(output[,1])
-  invisible(matrix(as.numeric(return.value),2,1))
+  invisible(matrix(as.numeric(output[,1]),2,1))
   # invisibly returning the statistics for further calculation of them
   }
