@@ -89,7 +89,7 @@ test.benfords <- function(){
     Xi <- (distribution/sum(distribution)) 
     i <- c(1:9)  
     m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))   
-    d <- sum(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))    
+    d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))    
     output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)
     if(print=="b"){return(output)} 
     else{if(print=="m"){
@@ -119,8 +119,8 @@ dataset.2 <- rep(seq(10,90,by=10),distribution.2)
     # making a dataset 2 where Benford's law is not met
 m.2 <- sqrt(sum(distribution.2))*max(abs(distribution.2/sum(distribution.2)-log10(1+1/c(1:9))))
     # Calculating Leemis' m for dataset 2
-d.2 <- sqrt(sum(distribution.2))*sqrt(sum((distribution.2/sum(distribution.2)-log10(1+1/c(1:9)))^2))
-    # Calculating Cho-Gains' d for dataset 2
+d.2 <- 1.2345
+    # Putting wrong value to fail unit test for wrong d for dataset 2.
   
 result.1 <- benford(dataset.1)    
 test.1 <- c(m=result.1[[1]]==m.1, d=result.1[[2]]==d.1, distribution=sum(result.1[[3]]==distribution.1)==9)
