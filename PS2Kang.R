@@ -89,7 +89,7 @@ test.benfords <- function(){
     Xi <- (distribution/sum(distribution)) 
     i <- c(1:9)  
     m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))   
-    d <- sqrt(sum(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))    
+    d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))    
     output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)
     if(print=="b"){return(output)} 
     else{if(print=="m"){
