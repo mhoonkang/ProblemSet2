@@ -63,7 +63,7 @@ print.benfords <- function(x){
   
   output <- matrix(c(m, d, asterisk[crit.m==TRUE],  asterisk[crit.d==TRUE]),2,2)  
   rownames(output) <- c("Leemis' m","Cho-Gains' d")
-  colnames(output) <- c("","")
+  colnames(output) <- c("Test Statistics","Signif. Level")
   # making a matrix which shows the name of each statistic, statistic as it was calculated,
   # and the relevant number of asterisk's. 
   # If the blooean value of crit.m(crit.d) is TRUE, then the corresponding element of asterisk
@@ -71,8 +71,12 @@ print.benfords <- function(x){
   
   cat("Benford's law test to reject the null hypothesis of no fraud")
   cat("\n")
+  cat("\n")
   print(output, quote=FALSE)
   cat("\n")
   cat("Significant Level: *** alpha<0.01, ** alpha<0.05, * alpha<0.10")
-  }
   # print the output without quotation mark, and print a legend explaining the asterisk's.
+  return.value<-t(output[,1])
+  invisible(matrix(as.numeric(return.value),2,1))
+  # invisibly returning the statistics for further calculation of them
+  }
