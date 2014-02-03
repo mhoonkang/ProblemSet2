@@ -127,9 +127,10 @@ test.1 <- c(m=result.1[[1]]==m.1, d=result.1[[2]]==d.1, distribution=sum(result.
     # comparing the truth for the digit distributions and two test statistics to the results 
     # from 'benford' fucntion for dataset 1.
 result.2 <- benford(dataset.2)
-test.2 <- c(m=result.2[[1]]==m.2, d=result.2[[2]]==d.2, distribution=sum(result.2[[3]]==distribution.2)==9)
+test.2 <- c(m=result.2[[1]]==m.2, d=result.2[[2]]==d.2, distribution=sum(result.2[[3]]!=distribution.2)==9)
     # comparing the truth for the digit distributions and two test statistics to the results 
     # from 'benford' fucntion for dataset 2.
+    # putting "!=" instead of "==" to fail unit test for wrong distribution for dataset 2.
 test <- c(test.1, test.2)
     # merging two boolean vectors.
   
