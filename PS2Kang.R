@@ -108,8 +108,8 @@ distribution.1 <- round(log10(1+1/c(1:9))*1000,0)
     # making a distribution according to Benford's law
 dataset.1 <- rep(seq(10,90,by=10),distribution.1) 
     # making a dataset 1 where Benford's law is met
-m.1 <- sqrt(sum(distribution.1))*max(abs(distribution.1/sum(distribution.1)-log10(1+1/c(1:9))))
-    # Calculating Leemis' m for dataset 1
+m.1 <- 1.2345
+    # putting wrong value to fail unit test for wrong m for dataset 1. 
 d.1 <- sqrt(sum(distribution.1))*sqrt(sum((distribution.1/sum(distribution.1)-log10(1+1/c(1:9)))^2))
     # Calculating Cho-Gains' d for dataset 1
     
